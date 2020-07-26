@@ -1,0 +1,42 @@
+CREATE DATABASE IF NOT EXISTS tunnel_snakes_db;
+
+USE tunnel_snakes_db;
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    is_admin TINYINT UNSIGNED,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS ads;
+
+CREATE TABLE IF NOT EXISTS ads (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+DROP TABLE IF EXISTS categories;
+
+CREATE TABLE IF NOT EXISTS categories (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS ad_category;
+
+CREATE TABLE IF NOT EXISTS ad_category (
+    ad_id INT UNSIGNED NOT NULL,
+    category_id INT UNSIGNED NOT NULL,
+    FOREIGN KEY (ad_id) REFERENCES ads (id),
+    FOREIGN KEY (category_id) REFERENCES categories (id)
+);
