@@ -6,7 +6,7 @@
             <a class="navbar-brand" href="/index.jsp">Adlister</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/login?from=${pageContext.request.requestURI}">Login</a></li>
+            <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
             <li><a href="/ads">Ads</a></li>
         </ul>
