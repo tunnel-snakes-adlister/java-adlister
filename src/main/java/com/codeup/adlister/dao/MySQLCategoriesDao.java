@@ -54,4 +54,23 @@ public class MySQLCategoriesDao implements Categories{
             throw new RuntimeException("Error creating a new category.", e);
         }
     }
+
+    @Override
+    public String whichCategory(String adId) {
+        String selectQuery = "SELECT name FROM categories\n" +
+                "JOIN ad_category ac on categories.id = ac.category_id\n" +
+                "JOIN ads a on ac.ad_id = a.id\n" +
+                "WHERE a.id = " + adId;
+        String category = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(selectQuery);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                category = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
 }
