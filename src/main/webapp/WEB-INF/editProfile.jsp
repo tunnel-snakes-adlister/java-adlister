@@ -17,26 +17,28 @@
 
 <div class="container">
     <h1>Edit Profile</h1>
+    <h4>Current Username: ${sessionScope.user.username}</h4>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Update Username</label>
             <input id="username" name="username" class="form-control" type="text">
         </div>
         <input type="submit" class="btn btn-primary btn-block" value="Update Username">
     </form>
+    <h4>Current Email: ${sessionScope.user.email}</h4>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Update Email</label>
             <input id="email" name="email" class="form-control" type="email">
-            <input type="submit" class="btn btn-primary btn-block" value="Update Email">
         </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Update Email">
     </form>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Update Password</label>
             <input id="password" name="password" class="form-control" type="password">
-            <input type="submit" class="btn btn-primary btn-block" value="Update Password">
         </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Update Password">
     </form>
 </div>
 
