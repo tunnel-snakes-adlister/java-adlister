@@ -22,11 +22,21 @@
             <label for="username">Username</label>
             <input id="username" name="username" class="form-control" type="text">
         </div>
+        <input type="submit" class="btn btn-primary btn-block" value="Update Username">
+    </form>
+    <form action="/edit-profile" method="POST">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" class="form-control" type="email">
+            <input type="submit" class="btn btn-primary btn-block" value="Update Email">
+        </div>
+    </form>
+    <form action="/edit-profile" method="POST">
         <div class="form-group">
             <label for="password">Password</label>
             <input id="password" name="password" class="form-control" type="password">
+            <input type="submit" class="btn btn-primary btn-block" value="Update Password">
         </div>
-        <input type="submit" class="btn btn-primary btn-block" value="Update Profile">
     </form>
 </div>
 
