@@ -9,5 +9,7 @@ public interface Users {
     User findByUserId(String id);
     Long insert(User user);
     boolean isAdmin(User user);
-    Long editProfile(User user);
+    boolean updateUsername(String updatedUsername, User user);
+    boolean updateEmail(String updatedEmail, User user);
+    boolean updatePassword(String updatedPassword, User user);
 }

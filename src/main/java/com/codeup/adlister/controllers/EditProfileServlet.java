@@ -1,6 +1,8 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,33 @@ public class EditProfileServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
 
+        String updatedUsername = request.getParameter("updatedUsername");
+        String updatedEmail = request.getParameter("updatedEmail");
+        String updatedPassword = request.getParameter("updatedPassword");
+        String passwordConfirmation = request.getParameter("confirm_password");
+
+        if(updatedUsername == null) {
+            updatedUsername = user.getUsername();
+        }else {
+            DaoFactory.getUsersDao().updateUsername(updatedUsername, user);
+            user.setUsername(updatedUsername);
+            response.sendRedirect("/profile");
+        }
+
+        if(updatedEmail == null) {
+            updatedEmail = user.getEmail();
+        }else {
+            DaoFactory.getUsersDao().updateEmail(updatedEmail, user);
+            user.setEmail(updatedEmail);
+            response.sendRedirect("/profile");
+        }
+
+        if(updatedPassword != null && updatedPassword.equals(passwordConfirmation)) {
+            DaoFactory.getUsersDao().updatePassword(Password.hash(updatedPassword), user);
+            response.sendRedirect("/profile");
+        }
     }
 }

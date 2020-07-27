@@ -96,10 +96,48 @@ public class MySQLUsersDao implements Users {
     }
 
     @Override
-    public Long editProfile(User user) {
-//        String query = "UPDATE users "
+    public boolean updateUsername(String updatedUsername, User user) {
+        String query = "UPDATE users SET username = ? WHERE id = ?";
 
-        return 1L;
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setString(1, updatedUsername);
+            prepStmt.setLong(2, user.getId());
+            int updated = prepStmt.executeUpdate();
+            return updated == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating username", e);
+        }
+    }
+
+    @Override
+    public boolean updateEmail(String updatedEmail, User user) {
+        String query = "UPDATE users SET email = ? WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setString(1, updatedEmail);
+            prepStmt.setLong(2, user.getId());
+            int updated = prepStmt.executeUpdate();
+            return updated == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating email", e);
+        }
+    }
+
+    @Override
+    public boolean updatePassword(String updatedPassword, User user) {
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setString(1, updatedPassword);
+            prepStmt.setLong(2, user.getId());
+            int updated = prepStmt.executeUpdate();
+            return updated == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating username", e);
+        }
     }
 
 }

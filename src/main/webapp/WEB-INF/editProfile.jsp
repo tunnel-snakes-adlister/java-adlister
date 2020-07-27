@@ -25,26 +25,32 @@
 
 <div class="container">
     <h1>Edit Profile</h1>
+    <h4>Current Username: ${sessionScope.user.username}</h4>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text">
+            <label for="updatedUsername">Update Username</label>
+            <input id="updatedUsername" name="updatedUsername" class="form-control" type="text">
         </div>
         <input type="submit" class="btn btn-primary btn-block" value="Update Username">
     </form>
+    <h4>Current Email: ${sessionScope.user.email}</h4>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="email">
-            <input type="submit" class="btn btn-primary btn-block" value="Update Email">
+            <label for="updatedEmail">Update Email</label>
+            <input id="updatedEmail" name="updatedEmail" class="form-control" type="email">
         </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Update Email">
     </form>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" name="password" class="form-control" type="password">
-            <input type="submit" class="btn btn-primary btn-block" value="Update Password">
+            <label for="updatedPassword">Update Password</label>
+            <input id="updatedPassword" name="updatedPassword" class="form-control" type="password">
         </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+        </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Update Password">
     </form>
 </div>
 
