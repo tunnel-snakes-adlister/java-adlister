@@ -83,4 +83,11 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    @Override
+    public Long editProfile(User user) {
+//        String query = "UPDATE users "
+
+        return 1L;
+    }
+
 }

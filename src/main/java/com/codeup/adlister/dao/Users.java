@@ -8,4 +8,5 @@ public interface Users {
     User findByUsername(String username);
     Long insert(User user);
     boolean isAdmin(User user);
+    Long editProfile(User user);
 }
