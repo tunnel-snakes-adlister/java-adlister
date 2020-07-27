@@ -9,4 +9,5 @@ public interface Users {
     User findByUserId(String id);
     Long insert(User user);
     boolean isAdmin(User user);
+    Long editProfile(User user);
 }
