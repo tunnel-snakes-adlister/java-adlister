@@ -5,8 +5,8 @@
             <a class="navbar-brand" href="/index.jsp">Adlister</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/profile">Register</a></li>
             <li><a href="/ads">Ads</a></li>
         </ul>
         <form class="form-inline nav navbar-right">
