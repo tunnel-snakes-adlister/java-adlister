@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.io.FileInputStream;
@@ -52,6 +53,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+        long next = 0;
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -60,11 +62,13 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(3, ad.getDescription());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            return rs.getLong(1);
+            while (rs.next()) {
+                next = rs.getLong(1);
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
+        return next;
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
@@ -83,4 +87,18 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    public List<Ad> userAds(User user) {
+        PreparedStatement stmt = null;
+        try {
+            String insertQuery = "SELECT * FROM ads WHERE user_id = ?";
+            stmt = connection.prepareStatement(insertQuery);
+            stmt.setLong(1, user.getId());
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
 }
