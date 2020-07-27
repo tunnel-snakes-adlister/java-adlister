@@ -63,4 +63,24 @@ public class MySQLUsersDao implements Users {
         );
     }
 
+    @Override
+    public boolean isAdmin(User user) {
+        String query = "SELECT is_admin FROM users WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setLong(1, user.getId());
+            ResultSet rs = prepStmt.executeQuery();
+            rs.next();
+            if (rs.getLong("is_admin") == 1) {
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error finding user with matching ID");
+        }
+    }
+
 }
