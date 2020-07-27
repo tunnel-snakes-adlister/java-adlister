@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -5,7 +6,7 @@
             <a class="navbar-brand" href="/index.jsp">Adlister</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/login">Login</a></li>
+            <li><a href="/login?from=${pageContext.request.requestURI}">Login</a></li>
             <li><a href="/register">Register</a></li>
             <li><a href="/ads">Ads</a></li>
         </ul>
