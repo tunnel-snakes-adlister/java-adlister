@@ -34,6 +34,18 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public boolean checkIfUsernameTaken(String username) {
+        String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
     @Override
     public User findByUserId(String id) {
         String query = "SELECT * FROM users WHERE id IN (SELECT user_id FROM ads WHERE id = ?) LIMIT 1";
