@@ -15,7 +15,30 @@
         <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
     </c:otherwise>
 </c:choose>
-<h1>TEST</h1>
+
+<div class="container">
+    <h1>Edit Ad</h1>
+
+    <div class="col-md-6">
+        <c:forEach var="ad" items="${ad}">
+            <h1>Created by ${user.username}</h1>
+            <h2>${ad.title}</h2>
+            <p>${category}</p>
+            <p>${ad.description}</p>
+        </c:forEach>
+    </div>
+    <form action="/edit-ad" method="post">
+        <div class="form-group">
+            <label for="updatedTitle">Update Title</label>
+            <input id="updatedTitle" name="updatedTitle" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="updatedDescription">Update Description</label>
+            <input id="updatedDescription" name="updatedDescription" class="form-control" type="text">
+        </div>
+
+    </form>
+</div>
 
 
 </body>
