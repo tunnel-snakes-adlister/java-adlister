@@ -18,4 +18,10 @@ public interface Ads {
     List<Ad> searchTitle(String search);
 
     List<Ad> searchCategory(String search);
+
+    boolean updateTitle(String updatedTitle, Ad ad);
+
+    boolean updateDescription(String updatedDescription, Ad ad);
+
+    Ad getAd(int id);
 }

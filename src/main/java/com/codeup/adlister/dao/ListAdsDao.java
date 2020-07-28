@@ -53,6 +53,15 @@ public class ListAdsDao implements Ads {
         return null;
     }
 
+    public boolean updateTitle(String updatedTitle, Ad ad){return false;}
+
+    public boolean updateDescription(String updatedDescription, Ad ad){return false;}
+
+    @Override
+    public Ad getAd(int id) {
+        return null;
+    }
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(

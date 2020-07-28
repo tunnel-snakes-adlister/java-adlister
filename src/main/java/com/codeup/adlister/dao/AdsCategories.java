@@ -10,4 +10,6 @@ public interface AdsCategories {
     List<AdCategory> all();
     // insert a new adcategory and return the new ad_id/category's id
     boolean insert(AdCategory adCategory);
+    //update category - ad relation after a user updated ad
+    boolean update(AdCategory adCategory);
 }

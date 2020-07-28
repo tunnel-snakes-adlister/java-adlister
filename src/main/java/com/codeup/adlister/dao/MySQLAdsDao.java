@@ -130,4 +130,47 @@ public class MySQLAdsDao implements Ads {
 
     }
 
+    public boolean updateTitle(String updatedTitle, Ad ad) {
+        String query = "UPDATE ads SET title = ? WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setString(1, updatedTitle);
+            prepStmt.setLong(2, ad.getId());
+            int updated = prepStmt.executeUpdate();
+            return updated == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating title", e);
+        }
+    }
+
+    public boolean updateDescription(String updatedDescription, Ad ad) {
+        String query = "UPDATE ads SET description = ? WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setString(1, updatedDescription);
+            prepStmt.setLong(2, ad.getId());
+            int updated = prepStmt.executeUpdate();
+            return updated == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating Description", e);
+        }
+    }
+
+    public Ad getAd(int id) {
+        String query = "SELECT * FROM ads WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setLong(1, id);
+            ResultSet rs = prepStmt.executeQuery();
+            rs.next();
+            return extractAd(rs);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new RuntimeException("Error getting ad", throwables);
+        }
+    }
+
 }
