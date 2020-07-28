@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(name="controllers.SearchServlet", urlPatterns = "/search")
@@ -21,16 +22,22 @@ public class SearchServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String search = request.getParameter("search");
-
-        List<Ad> ads = DaoFactory.getAdsDao().search(search) ;
-
+        List<Ad> ads = DaoFactory.getAdsDao().searchTitle(search);
+        List<Ad> ads2 = DaoFactory.getAdsDao().searchCategory(search);
         if (ads == null) {
-            response.sendRedirect("/search");
+            response.sendRedirect("/searchfail");
             return;
-        }
+        }else {
 
-        request.getSession().setAttribute("ads",ads);
-        response.sendRedirect("/search");
+            if (request.getParameter("sort").equals("sort1")) {
+                request.getSession().setAttribute("ads", ads);
+                response.sendRedirect("/search");
+            } else if (request.getParameter("sort").equals( "cat")){
+                request.getSession().setAttribute("ads",ads2);
+                response.sendRedirect("/search");
+
+            }
+        }
 //        boolean validAttempt = Password.check(password, user.getPassword());
 
 //        if (validAttempt) {

@@ -25,13 +25,6 @@
 
 <div class="container">
     <h1>Here are the search results!</h1>
-    <form action="/search" method="post">
-    <select name="sort" onchange="this.form.submit()">
-        <option value="sort1">SORT</option>
-        <option value="alpha">Sort A-Z</option>
-        <option value="revalpha">Sort Z-A</option>
-        <option value="revalpha">By Category</option>
-    </select>
     </form>
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">

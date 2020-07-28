@@ -15,5 +15,7 @@ public interface Ads {
 
     List<Ad> userAds(User user);
 
-    List<Ad> search(String Search);
+    List<Ad> searchTitle(String search);
+
+    List<Ad> searchCategory(String search);
 }
