@@ -53,4 +53,19 @@ public class MySQLAdsCategoriesDao implements AdsCategories{
             throw new RuntimeException("Error inserting an entry.", e);
         }
     }
+
+    @Override
+    public boolean update(AdCategory adCategory) {
+        String query = "UPDATE ad_category SET category_id = ? WHERE ad_id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setLong(1, adCategory.getCategoryId());
+            prepStmt.setLong(2, adCategory.getAdId());
+            int updated = prepStmt.executeUpdate();
+            return updated == 1;
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Error updating ad_category table", throwables);
+        }
+    }
 }
