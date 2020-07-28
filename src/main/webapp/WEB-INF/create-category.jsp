@@ -14,7 +14,7 @@
 <body>
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
-        <jsp:include page="/WEB-INF/partials/loggedInNavbar.jsp"/>
+        <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
     </c:when>
     <c:otherwise>
         <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
