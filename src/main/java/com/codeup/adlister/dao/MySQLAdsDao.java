@@ -101,4 +101,19 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+
+    public List<Ad> search(String search) {
+        PreparedStatement stmt = null;
+        try {
+            String insertQuery = "SELECT * FROM ads WHERE title = ?";
+            stmt = connection.prepareStatement(insertQuery);
+            stmt.setString(1, search);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+
+    }
+
 }
