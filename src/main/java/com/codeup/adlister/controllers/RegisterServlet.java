@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -22,20 +25,48 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
 
-        if (inputHasErrors) {
-            response.sendRedirect("/register");
-            return;
+        // validate input
+        boolean inputHasErrors = username.trim().isEmpty()
+                || email.isEmpty()
+                || password.isEmpty()
+                || (!password.equals(passwordConfirmation))
+                || username.equalsIgnoreCase(DaoFactory.getUsersDao().checkIfUsernameTaken(username));
+
+        if (username.trim().isEmpty()) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Please enter a username');");
+            out.println("location='register';</script>");
+        } else if (username.equalsIgnoreCase(DaoFactory.getUsersDao().checkIfUsernameTaken(username))) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('The username you entered is already taken');");
+            out.println("location='register';</script>");
+        } else if (email.isEmpty()) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Please enter an email');");
+            out.println("location='register';</script>");
+        } else if (password.isEmpty()) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Please enter a password');");
+            out.println("location='register';</script>");
+        } else if (!password.equals(passwordConfirmation)) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Your passwords don't match');");
+            out.println("location='register';</script>");
+        } else {
+            User user = new User(username.trim(), email, password);
+            DaoFactory.getUsersDao().insert(user);
+            response.sendRedirect("/login");
         }
 
+//        if (inputHasErrors) {
+//            response.sendRedirect("/register");
+//            return;
+//        }
+
         // create and save a new user
-        User user = new User(username, email, password);
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
+
     }
 }
