@@ -9,7 +9,7 @@
 <body>
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
-        <jsp:include page="/WEB-INF/partials/loggedInNavbar.jsp"/>
+        <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
     </c:when>
     <c:otherwise>
         <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
@@ -20,19 +20,19 @@
         <form action="/register" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text"><span>${messages.username}</span>
+                <input id="username" name="username" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" name="email" class="form-control" type="text"><span>${messages.email}</span>
+                <input id="email" name="email" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password"><span>${messages.password}</span>
+                <input id="password" name="password" class="form-control" type="password">
             </div>
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input id="confirm_password" name="confirm_password" class="form-control" type="password"><span>${messages.confirmPassword}</span>
+                <input id="confirm_password" name="confirm_password" class="form-control" type="password">
             </div>
             <input type="submit" class="btn btn-primary btn-block">
         </form>

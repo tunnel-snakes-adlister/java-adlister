@@ -20,7 +20,7 @@ public class EditProfileServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-        request.getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/edit-profile.jsp").forward(request, response);
     }
 
     @Override

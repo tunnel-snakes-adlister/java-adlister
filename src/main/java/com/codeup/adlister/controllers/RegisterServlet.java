@@ -28,18 +28,11 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        // validate input
-        boolean inputHasErrors = username.trim().isEmpty()
-                || email.isEmpty()
-                || password.isEmpty()
-                || (!password.equals(passwordConfirmation))
-                || username.equalsIgnoreCase(DaoFactory.getUsersDao().checkIfUsernameTaken(username));
-
         if (username.trim().isEmpty()) {
             out.println("<script type='text/javascript'>");
             out.println("alert('Please enter a username');");
             out.println("location='register';</script>");
-        } else if (username.equalsIgnoreCase(DaoFactory.getUsersDao().checkIfUsernameTaken(username))) {
+        } else if (DaoFactory.getUsersDao().checkIfUsernameTaken(username)) {
             out.println("<script type='text/javascript'>");
             out.println("alert('The username you entered is already taken');");
             out.println("location='register';</script>");
@@ -53,20 +46,12 @@ public class RegisterServlet extends HttpServlet {
             out.println("location='register';</script>");
         } else if (!password.equals(passwordConfirmation)) {
             out.println("<script type='text/javascript'>");
-            out.println("alert('Your passwords don't match');");
+            out.println("alert('Your passwords do not match');");
             out.println("location='register';</script>");
         } else {
             User user = new User(username.trim(), email, password);
             DaoFactory.getUsersDao().insert(user);
             response.sendRedirect("/login");
         }
-
-//        if (inputHasErrors) {
-//            response.sendRedirect("/register");
-//            return;
-//        }
-
-        // create and save a new user
-
     }
 }

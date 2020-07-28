@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -22,26 +23,36 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        System.out.println(request.getHeader("referer"));
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+//        boolean validAttempt = Password.check(password, user.getPassword());
+
         if (user == null) {
-            response.sendRedirect("/login");
-            return;
-        }
-
-        boolean validAttempt = Password.check(password, user.getPassword());
-
-        if (validAttempt) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('No user exists with that username');");
+            out.println("location='login';</script>");
+//            response.sendRedirect("/login");
+//            return;
+        } else if (!Password.check(password, user.getPassword())) {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('The password you entered is incorrect');");
+            out.println("location='login';</script>");
+        } else if (Password.check(password, user.getPassword())) {
             request.getSession().setAttribute("user", user);
-//            response.sendRedirect(request.getHeader("referer"));
             response.sendRedirect("/profile");
-        } else {
-            response.sendRedirect("/login");
         }
+
+
+//        if (validAttempt) {
+//            request.getSession().setAttribute("user", user);
+//            response.sendRedirect("/profile");
+//        } else {
+//            response.sendRedirect("/login");
+//        }
     }
 }
