@@ -13,7 +13,11 @@ import java.io.IOException;
 @WebServlet(name = "controllers.ViewProfileServlet", urlPatterns = "/profile")
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") == null) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (DaoFactory.getUsersDao().isAdmin(user)) {
+            response.sendRedirect("/admin");
+            return;
+        }else if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
             return;
         }
