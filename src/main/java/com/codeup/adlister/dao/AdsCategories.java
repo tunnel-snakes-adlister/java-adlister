@@ -12,4 +12,6 @@ public interface AdsCategories {
     boolean insert(AdCategory adCategory);
     //update category - ad relation after a user updated ad
     boolean update(AdCategory adCategory);
+
+    boolean delete(int adId);
 }
