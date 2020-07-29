@@ -34,27 +34,29 @@ public class CreateAdServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        if (request.getParameter("title").isEmpty()) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Please enter a title');");
-            out.println("location='/ads/create';</script>");
-        } else if (request.getParameter("description").isEmpty()) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Please enter a description');");
-            out.println("location='/ads/create';</script>");
-        } else {
-            Ad ad = new Ad(
-                    user.getId(),
-                    request.getParameter("title"),
-                    request.getParameter("description")
-            );
-            long adId = DaoFactory.getAdsDao().insert(ad);
-            AdCategory adCategory = new AdCategory(
-                    adId,
-                    parseLong(request.getParameter("category"))
-            );
-            DaoFactory.getAdsCategoriesDao().insert(adCategory);
-            response.sendRedirect("/ads");
+        try {
+            if (request.getParameter("title").isEmpty()) {
+                request.setAttribute("titleError", "Please enter a title");
+                request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
+            } else if (request.getParameter("description").isEmpty()) {
+                request.setAttribute("descriptionError", "Please enter a description");
+                request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
+            } else {
+                Ad ad = new Ad(
+                        user.getId(),
+                        request.getParameter("title"),
+                        request.getParameter("description")
+                );
+                long adId = DaoFactory.getAdsDao().insert(ad);
+                AdCategory adCategory = new AdCategory(
+                        adId,
+                        parseLong(request.getParameter("category"))
+                );
+                DaoFactory.getAdsCategoriesDao().insert(adCategory);
+                response.sendRedirect("/ads");
+            }
+        } catch (ServletException e) {
+            e.printStackTrace();
         }
     }
 }

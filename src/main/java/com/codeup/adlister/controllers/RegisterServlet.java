@@ -28,30 +28,29 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        if (username.trim().isEmpty()) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Please enter a username');");
-            out.println("location='register';</script>");
-        } else if (DaoFactory.getUsersDao().checkIfUsernameTaken(username)) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('The username you entered is already taken');");
-            out.println("location='register';</script>");
-        } else if (email.isEmpty()) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Please enter an email');");
-            out.println("location='register';</script>");
-        } else if (password.isEmpty()) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Please enter a password');");
-            out.println("location='register';</script>");
-        } else if (!password.equals(passwordConfirmation)) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Your passwords do not match');");
-            out.println("location='register';</script>");
-        } else {
-            User user = new User(username.trim(), email, password);
-            DaoFactory.getUsersDao().insert(user);
-            response.sendRedirect("/login");
+        try {
+            if (username.trim().isEmpty()) {
+                request.setAttribute("usernameEmpty", "Please enter a username");
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else if (DaoFactory.getUsersDao().checkIfUsernameTaken(username)) {
+                request.setAttribute("usernameTaken", "The username you entered is already taken");
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else if (email.isEmpty()) {
+                request.setAttribute("emailEmpty", "Please enter an email");
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else if (password.isEmpty()) {
+                request.setAttribute("passwordEmpty", "Please enter a password");
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else if (!password.equals(passwordConfirmation)) {
+                request.setAttribute("passwordDifferent", "Passwords do not match");
+                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else {
+                User user = new User(username.trim(), email, password);
+                DaoFactory.getUsersDao().insert(user);
+                response.sendRedirect("/login");
+            }
+        } catch (ServletException e) {
+            e.printStackTrace();
         }
     }
 }

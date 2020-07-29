@@ -30,29 +30,19 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-//        boolean validAttempt = Password.check(password, user.getPassword());
-
-        if (user == null) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('No user exists with that username');");
-            out.println("location='login';</script>");
-//            response.sendRedirect("/login");
-//            return;
-        } else if (!Password.check(password, user.getPassword())) {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('The password you entered is incorrect');");
-            out.println("location='login';</script>");
-        } else if (Password.check(password, user.getPassword())) {
-            request.getSession().setAttribute("user", user);
-            response.sendRedirect("/profile");
+        try {
+            if (user == null) {
+                request.setAttribute("usernameError", "Please enter a username");
+                request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            } else if (!Password.check(password, user.getPassword())) {
+                request.setAttribute("passwordError", "The password you entered is incorrect");
+                request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            } else if (Password.check(password, user.getPassword())) {
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("/profile");
+            }
+        } catch (ServletException e) {
+            e.printStackTrace();
         }
-
-
-//        if (validAttempt) {
-//            request.getSession().setAttribute("user", user);
-//            response.sendRedirect("/profile");
-//        } else {
-//            response.sendRedirect("/login");
-//        }
     }
 }
