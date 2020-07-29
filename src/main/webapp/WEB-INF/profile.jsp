@@ -16,11 +16,11 @@
     </c:otherwise>
 </c:choose>
     <div class="container">
-        <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <h1>Welcome, <c:out value="${sessionScope.user.username}!"/></h1>
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+            <h2><c:out value="${ad.title}"/></h2>
+            <p><c:out value="${ad.description}"/></p>
             <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/edit-ad/${ad.id}" role="button">Edit Ad</a>
             <a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/delete-ad/${ad.id}" role="button">Delete Ad</a>
         </div>
