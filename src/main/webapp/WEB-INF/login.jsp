@@ -17,7 +17,7 @@
 </c:choose>
     <div class="container">
         <h1>Please Log In</h1>
-        <form action="/login" method="POST">
+        <form action="/login" method="POST" name="myform">
             <div class="form-group">
                 <label for="username">Username</label>
                 <p>${usernameError}</p>

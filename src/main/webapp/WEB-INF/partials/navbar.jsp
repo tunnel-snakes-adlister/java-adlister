@@ -10,7 +10,7 @@
             <li><a href="/register">Register</a></li>
             <li><a href="/ads">Ads</a></li>
         </ul>
-        <form class="form-inline nav navbar-right" action="/search" method="POST" href="/search">
+        <form class="form-inline nav navbar-right" action="/search" method="POST" href="/search" name="myform">
             <input id="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <select name="sort">
                     <option value="sort1">By Title</option>
@@ -20,6 +20,19 @@
 <%--            <a href="/search" class="Button btn btn-outline-success" type="submit">Submit</a>--%>
 
         </form>
+        <script type="text/javascript">
+            (function() {
+                var form = document.getElementsByName('myform')[0];
+                if (localStorage['name'] !== undefined) {
+                    var displayArea = document.getElementById('theSearch');
+                    displayArea.textContent = localStorage['search'];
+                }
+                form.addEventListener('submit', function() {
+                    var nameField = document.getElementsByName('search')[0];
+                    localStorage['search'] = nameField.value;
+                }, false);
+            })();
+        </script>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
