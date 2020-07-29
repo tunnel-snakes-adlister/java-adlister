@@ -17,6 +17,7 @@
 </c:choose>
     <div class="container">
         <h1>Please Log In</h1>
+        <div class="card bg-green" style="width: 10em">
         <form action="/login" method="POST" name="myform">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -30,6 +31,7 @@
             </div>
             <input type="submit" class="btn btn-primary btn-block" value="Log In">
         </form>
+        </div>
     </div>
 </body>
 </html>

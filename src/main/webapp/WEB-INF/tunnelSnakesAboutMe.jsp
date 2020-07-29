@@ -9,13 +9,13 @@
 <div class="container">
 <div class="row">
     <div class="col-sm">
-        <img src="<c:url value='/img/jahziel.jpg'/>" alt="jahziel">
+        <img src="<c:url value='../img/jahziel.jpg'/>" alt="jahziel">
     </div>
     <div class="col-sm">
-        <img src="<c:url value='/img/larry.jpg'/>" alt="larry">
+        <img src="<c:url value='../img/larry.jpg'/>" alt="larry">
     </div>
     <div class="col-sm">
-        <img src="<c:url value='/img/justin.jpg'/>" alt="justin">
+        <img src="<c:url value='../img/justin.jpg'/>" alt="justin">
     </div>
 </div>
 </div>
