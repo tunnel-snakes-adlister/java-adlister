@@ -20,12 +20,12 @@
         <form action="/login" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <p>${usernameError}</p>
+                <p><c:out value="${usernameError}"/></p>
                 <input id="username" name="username" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <p>${passwordError}</p>
+                <p><c:out value="${passwordError}"/></p>
                 <input id="password" name="password" class="form-control" type="password">
             </div>
             <input type="submit" class="btn btn-primary btn-block" value="Log In">

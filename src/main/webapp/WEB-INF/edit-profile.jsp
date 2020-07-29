@@ -25,7 +25,7 @@
 
 <div class="container">
     <h1>Edit Profile</h1>
-    <h4>Current Username: ${sessionScope.user.username}</h4>
+    <h4>Current Username: <c:out value="${sessionScope.user.username}"/></h4>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
             <label for="updatedUsername">Update Username</label>
@@ -33,7 +33,7 @@
         </div>
         <input type="submit" class="btn btn-primary btn-block" value="Update Username">
     </form>
-    <h4>Current Email: ${sessionScope.user.email}</h4>
+    <h4>Current Email: <c:out value="${sessionScope.user.email}"/></h4>
     <form action="/edit-profile" method="POST">
         <div class="form-group">
             <label for="updatedEmail">Update Email</label>

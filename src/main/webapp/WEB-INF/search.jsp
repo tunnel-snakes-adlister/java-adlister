@@ -28,7 +28,7 @@
     </form>
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2>${ad.title}</h2>
+            <h2><c:out value="${ad.title}"/></h2>
             <a href="${pageContext.request.contextPath}/ads/individual-ad/${ad.id}">Click for more info</a>
         </div>
     </c:forEach>
