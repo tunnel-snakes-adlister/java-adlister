@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Please Log In" />
     </jsp:include>
 </head>
-<body>
+<body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
         <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
@@ -15,10 +15,10 @@
         <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
     </c:otherwise>
 </c:choose>
-    <div class="container">
-        <h1>Please Log In</h1>
-        <div class="card bg-green" style="width: 10em">
-        <form action="/login" method="POST" name="myform">
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="card border-0 mr-5 bg-secondary" style="width: 40em">
+            <h1 class="text-center">Log In</h1>
+            <form action="/login" method="POST" name="myform">
             <div class="form-group">
                 <label for="username">Username</label>
                 <p><c:out value="${usernameError}"/></p>
@@ -33,5 +33,6 @@
         </form>
         </div>
     </div>
+<jsp:include page="/WEB-INF/partials/footer.jsp"/>
 </body>
 </html>

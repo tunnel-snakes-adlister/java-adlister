@@ -104,10 +104,11 @@ public class MySQLAdsDao implements Ads {
 
     public List<Ad> searchTitle(String search) {
         PreparedStatement stmt = null;
+        String sql = "%" + search + "%";
         try {
-            String insertQuery = "SELECT * FROM ads WHERE title = ?";
+            String insertQuery = "SELECT * FROM ads WHERE title LIKE ?";
             stmt = connection.prepareStatement(insertQuery);
-            stmt.setString(1, search);
+            stmt.setString(1, sql);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -118,10 +119,12 @@ public class MySQLAdsDao implements Ads {
 
     public List<Ad> searchCategory(String search) {
         PreparedStatement stmt = null;
+        String sql = "%" + search + "%";
+
         try {
-            String insertQuery = "SELECT * FROM ads JOIN ad_category ON ads.id = ad_category.ad_id JOIN categories ON ad_category.category_id = categories.id WHERE name = ?";
+            String insertQuery = "SELECT * FROM ads JOIN ad_category ON ads.id = ad_category.ad_id JOIN categories ON ad_category.category_id = categories.id WHERE name LIKE ?";
             stmt = connection.prepareStatement(insertQuery);
-            stmt.setString(1, search);
+            stmt.setString(1, sql);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {

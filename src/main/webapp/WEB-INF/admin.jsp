@@ -13,7 +13,7 @@
         <jsp:param name="title" value="Admin Dashboard"/>
     </jsp:include>
 </head>
-<body>
+<body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
         <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
@@ -23,26 +23,43 @@
     </c:otherwise>
 </c:choose>
 
-<h1>ADMIN PAGE, OHHHH YEA</h1>
-
-<div class="container">
+<h1 class="text-center">Admin Page</h1>
+<hr>
+<h1 class="text-center">Edit Ads</h1>
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
-            <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/edit-ad/${ad.id}" role="button">Edit Ad</a>
-            <a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/delete-ad/${ad.id}" role="button">Delete Ad</a>
+        <div class="card m-2 col-5">
+            <div class="card-body">
+            <h2 class="card-title text-center">${ad.title}</h2>
+            <p class="card-text text-center">${ad.description}</p>
+                <div class="d-flex justify-content-center">
+                <a class="btn btn-outline-primary btn-sm w-50 mr-1" href="${pageContext.request.contextPath}/edit-ad/${ad.id}" role="button">Edit Ad</a>
+                <a class="btn btn-outline-danger btn-sm w-50" href="${pageContext.request.contextPath}/delete-ad/${ad.id}" role="button">Delete Ad</a>
+                </div>
+            </div>
         </div>
     </c:forEach>
+    </div>
 </div>
-<div class="container">
+
+<hr>
+
+<h1 class="text-center">Edit Users</h1>
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
     <c:forEach var="user"  items="${users}">
-        <div class="col-md-6">
-            <h2>${user.username}</h2>
-            <h4>${user.email}</h4>
-            <a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/delete-user/${user.id}" role="button">Delete User</a>
+        <div class="card m-2 col-5">
+            <div class="card-body">
+            <h2 class="text-center card-title">${user.username}</h2>
+            <h4 class=" text-center card-subtitle">${user.email}</h4>
+                <div class="d-flex justify-content-center mt-2">
+            <a class="btn btn-outline-danger btn-sm w-50" href="${pageContext.request.contextPath}/delete-user/${user.id}" role="button">Delete User</a>
+                </div>
+            </div>
         </div>
     </c:forEach>
+    </div>
 </div>
 
 </body>

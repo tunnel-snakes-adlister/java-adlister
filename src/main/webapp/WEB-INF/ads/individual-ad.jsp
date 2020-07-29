@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Viewing More Info" />
     </jsp:include>
 </head>
-<body>
+<body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
         <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
@@ -17,14 +17,13 @@
 </c:choose>
 
 <div class="container">
-    <h1>Here's more information about the ad!</h1>
 
-    <div class="col-md-6">
+    <div class="card border-none mt-5 p-4" style="">
         <c:forEach var="ad" items="${ad}">
-            <h1>Created by ${user.username}</h1>
             <h2>${ad.title}</h2>
-            <p>${category}</p>
+            <h5>${category}</h5>
             <p>${ad.description}</p>
+            <h4>Created by ${user.username}</h4>
         </c:forEach>
     </div>
 </div>
