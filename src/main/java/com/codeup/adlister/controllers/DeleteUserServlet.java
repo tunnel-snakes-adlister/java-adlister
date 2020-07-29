@@ -16,7 +16,7 @@ public class DeleteUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userId = request.getPathInfo().substring(1);
-        DaoFactory.getUsersDao().deleteUser(userId);
+        DaoFactory.getUsersDao().deleteUser(parseInt(userId));
         response.sendRedirect("/profile");
     }
 }

@@ -99,8 +99,22 @@ public class MySQLUsersDao implements Users {
     }
 
     @Override
-    public boolean deleteUser(String userId) {
-        User user = findByUserId(userId);
+    public User findUser(int userId) {
+        String query = "SELECT * FROM users WHERE id = ? LIMIT 1";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setLong(1, userId);
+            ResultSet rs = prepStmt.executeQuery();
+            return extractUser(rs);
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Error finding user", throwables);
+        }
+    }
+
+    @Override
+    public boolean deleteUser(int userId) {
+        User user = findUser(userId);
 
         List<Ad> ads = DaoFactory.getAdsDao().userAds(user);
 
