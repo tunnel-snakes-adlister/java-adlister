@@ -13,4 +13,7 @@ public interface Users {
     boolean updateUsername(String updatedUsername, User user);
     boolean updateEmail(String updatedEmail, User user);
     boolean updatePassword(String updatedPassword, User user);
+    List<User> allUsers();
+    boolean deleteUser(int userId);
+    User findUser(int id);
 }

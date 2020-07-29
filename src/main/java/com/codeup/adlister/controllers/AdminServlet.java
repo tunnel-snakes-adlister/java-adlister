@@ -16,6 +16,8 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User user = (User) request.getSession().getAttribute("user");
         if (DaoFactory.getUsersDao().isAdmin(user)) {
+            request.setAttribute("ads", DaoFactory.getAdsDao().all());
+            request.setAttribute("users", DaoFactory.getUsersDao().allUsers());
             request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
         }else {
             response.sendRedirect("/ads");
