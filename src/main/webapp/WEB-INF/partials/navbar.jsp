@@ -9,6 +9,7 @@
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
             <li><a href="/ads">Ads</a></li>
+            <li><a href="/ads/create">Create an Ad</a></li>
         </ul>
         <form class="form-inline nav navbar-right" action="/search" method="POST" href="/search" name="myform">
             <input id="search" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
