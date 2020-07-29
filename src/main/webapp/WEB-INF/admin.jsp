@@ -35,6 +35,14 @@
         </div>
     </c:forEach>
 </div>
+<div class="container">
+    <c:forEach var="user"  items="${users}">
+        <div class="col-md-6">
+            <h2>${user.username}</h2>
+            <h4>${user.email}</h4>
+        </div>
+    </c:forEach>
+</div>
 
 </body>
 </html>
