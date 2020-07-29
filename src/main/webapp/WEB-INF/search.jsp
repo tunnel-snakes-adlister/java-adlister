@@ -13,7 +13,7 @@
         <jsp:param name="title" value="Viewing All The Ads" />
     </jsp:include>
 </head>
-<body>
+<body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
         <jsp:include page="/WEB-INF/partials/loggedInNavbar.jsp"/>

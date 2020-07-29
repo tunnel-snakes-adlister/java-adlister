@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Register For Our Site!" />
     </jsp:include>
 </head>
-<body>
+<body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
         <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
@@ -16,7 +16,8 @@
     </c:otherwise>
 </c:choose>
     <div class="container">
-        <h1>Please fill in your information.</h1>
+        <div class="card bg-secondary border-0">
+        <h1 class="text-center">Register New User</h1>
         <form action="/register" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -40,6 +41,7 @@
             </div>
             <input type="submit" class="btn btn-primary btn-block">
         </form>
+        </div>
     </div>
 </body>
 </html>
