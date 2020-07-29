@@ -6,8 +6,10 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/logout">Logout</a></li>
-            <li><a href="/profile">Register</a></li>
+            <li><a href="/profile">Profile</a></li>
             <li><a href="/ads">Ads</a></li>
+            <li><a href="/ads/create">Create an Ad</a></li>
+
         </ul>
         <form class="form-inline nav navbar-right" name="myform">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
