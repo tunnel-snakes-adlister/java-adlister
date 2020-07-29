@@ -24,4 +24,6 @@ public interface Ads {
     boolean updateDescription(String updatedDescription, Ad ad);
 
     Ad getAd(int id);
+
+    boolean deleteAd(int id);
 }

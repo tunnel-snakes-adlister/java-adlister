@@ -68,4 +68,18 @@ public class MySQLAdsCategoriesDao implements AdsCategories{
             throw new RuntimeException("Error updating ad_category table", throwables);
         }
     }
+
+    @Override
+    public boolean delete(int adId) {
+        String query = "DELETE FROM ad_category WHERE ad_id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setLong(1, adId);
+            int deleted = prepStmt.executeUpdate();
+            return deleted == 1;
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Error deleting ad_category relation row", throwables);
+        }
+    }
 }
