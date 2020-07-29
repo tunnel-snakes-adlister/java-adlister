@@ -16,7 +16,7 @@
 <body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
-        <jsp:include page="/WEB-INF/partials/loggedInNavbar.jsp"/>
+        <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>
     </c:when>
     <c:otherwise>
         <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
@@ -25,13 +25,14 @@
 
 <div class="container">
     <h1>Here are the search results!</h1>
-    </form>
+    <div class="d-flex flex-wrap justify-content-center">
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
+        <div class="card col-4 m-3">
             <h2><c:out value="${ad.title}"/></h2>
             <a href="${pageContext.request.contextPath}/ads/individual-ad/${ad.id}">Click for more info</a>
         </div>
     </c:forEach>
+    </div>
 </div>
 
 </body>
