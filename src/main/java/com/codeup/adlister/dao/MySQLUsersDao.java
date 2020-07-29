@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
@@ -94,6 +95,28 @@ public class MySQLUsersDao implements Users {
             return users;
         } catch (SQLException throwables) {
             throw new RuntimeException("Error retrieving all users.", throwables);
+        }
+    }
+
+    @Override
+    public boolean deleteUser(String userId) {
+        User user = findByUserId(userId);
+
+        List<Ad> ads = DaoFactory.getAdsDao().userAds(user);
+
+        for(Ad ad : ads) {
+            DaoFactory.getAdsDao().deleteAd((int) ad.getId());
+        }
+
+        String query = "DELETE FROM users WHERE id = ?";
+
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(query);
+            prepStmt.setLong(1, user.getId());
+            int deleted = prepStmt.executeUpdate();
+            return deleted == 1;
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Error deleting user", throwables);
         }
     }
 

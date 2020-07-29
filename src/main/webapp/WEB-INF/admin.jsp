@@ -40,6 +40,7 @@
         <div class="col-md-6">
             <h2>${user.username}</h2>
             <h4>${user.email}</h4>
+            <a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/delete-user/${user.id}" role="button">Delete User</a>
         </div>
     </c:forEach>
 </div>
