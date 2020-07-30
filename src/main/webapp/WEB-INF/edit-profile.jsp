@@ -13,7 +13,7 @@
         <jsp:param name="title" value="Edit Profile"/>
     </jsp:include>
 </head>
-<body>
+<body class="bg-secondary">
 <c:choose>
     <c:when test="${sessionScope.user!=null}">
         <jsp:include page="/WEB-INF/partials/logged-in-navbar.jsp"/>

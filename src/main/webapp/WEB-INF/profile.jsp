@@ -16,6 +16,9 @@
     </c:otherwise>
 </c:choose>
 <h1 class="text-center">Welcome, <c:out value="${sessionScope.user.username}!"/></h1>
+<div class="d-flex justify-content-center">
+    <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+</div>
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
         <c:forEach var="ad" items="${ads}">
