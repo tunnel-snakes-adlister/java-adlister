@@ -24,6 +24,9 @@
 </c:choose>
 
 <h1 class="text-center">Admin Page</h1>
+<div class="d-flex justify-content-center">
+    <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+</div>
 <hr>
 <h1 class="text-center">Edit Ads</h1>
 <div class="container-fluid">
